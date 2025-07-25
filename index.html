@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abdulrahman Hussein | AI & Climate Change Innovator</title>
+    <meta name="description" content="PhD Researcher & AI Climate Innovator | 9+ years driving sustainable development | Award-winning founder of Planty & STREET TECH">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Neue+Machina:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link href="https://unpkg.com/lucide@latest/font/lucide.css" rel="stylesheet">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/climate-styles.css">
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="https://unpkg.com/three@0.132.2/build/three.min.js" as="script">
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" as="script">
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" as="script">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#home" class="nav-logo">AH</a>
+            <ul class="nav-links">
+                <li><a href="#showcase" class="nav-link">Showcase</a></li>
+                <li><a href="#research" class="nav-link">Research</a></li>
+                <li><a href="#media" class="nav-link">Media</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                <i data-lucide="moon" class="theme-icon"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section - The Overview Effect -->
+    <section class="hero" id="home">
+        <div class="earth-container" id="earthContainer"></div>
+        <div class="hero-content">
+            <h1 class="hero-title">Abdulrahman Hussein</h1>
+            <p class="hero-subtitle">Transforming Climate Challenges into Sustainable Solutions</p>
+            <div class="role-cycler" id="roleCycler">AI & Climate Change Innovator</div>
+            <div class="hero-cta">
+                <a href="#showcase" class="btn btn-primary">Explore My Work</a>
+                <a href="#contact" class="btn btn-outline">Get in Touch</a>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <span>Scroll to explore</span>
+            <i data-lucide="chevron-down"></i>
+        </div>
+    </section>
+
+    <!-- Impact Ticker -->
+    <section class="impact-ticker">
+        <div class="ticker-track">
+            <div class="ticker-item">
+                <span class="ticker-value">20%</span>
+                <span class="ticker-label">Efficiency improvement from smart ag-solutions</span>
+            </div>
+            <div class="ticker-item">
+                <span class="ticker-value">15-20%</span>
+                <span class="ticker-label">Crop yield improvements from lectures</span>
+            </div>
+            <div class="ticker-item">
+                <span class="ticker-value">$20,000</span>
+                <span class="ticker-label">USAID climate change scholarship</span>
+            </div>
+            <div class="ticker-item">
+                <span class="ticker-value">5,000+</span>
+                <span class="ticker-label">Beneficiaries from community events</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Showcase Section - Planty Deep Dive -->
+    <section class="showcase" id="showcase">
+        <div class="showcase-container">
+            <div class="showcase-content">
+                <h2 class="section-title">Planty: Smart Agriculture</h2>
+                <div class="showcase-text" id="showcaseText">
+                    <div class="text-step active" data-step="1">
+                        <h3>From Aswan's Fields to Global Impact</h3>
+                        <p>Born from the rich agricultural heritage of Aswan, Planty represents a fusion of traditional farming wisdom with cutting-edge AI technology.</p>
+                    </div>
+                    <div class="text-step" data-step="2">
+                        <h3>AI-Powered Precision Agriculture</h3>
+                        <p>Our proprietary AI algorithms analyze soil conditions, weather patterns, and crop health to deliver actionable insights to farmers.</p>
+                    </div>
+                    <div class="text-step" data-step="3">
+                        <h3>Recognized Excellence</h3>
+                        <p>Award-winning innovation recognized at Th3 Place AI Hackathon and Startup Power Competition.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="showcase-visuals">
+                <div class="visual-item active" data-step="1">
+                    <img src="images/aswan-fields.jpg" alt="Aswan agricultural fields" class="showcase-image">
+                </div>
+                <div class="visual-item" data-step="2">
+                    <img src="images/planty-app.jpg" alt="Planty mobile application interface" class="showcase-image">
+                </div>
+                <div class="visual-item" data-step="3">
+                    <div class="awards-grid">
+                        <div class="award-item">
+                            <img src="images/hackathon-award.jpg" alt="Th3 Place AI Hackathon Award" class="award-image">
+                            <p>1st Place - Th3 Place AI Hackathon</p>
+                        </div>
+                        <div class="award-item">
+                            <img src="images/startup-award.jpg" alt="Startup Power Competition Award" class="award-image">
+                            <p>Winner - Startup Power Competition</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Research Section -->
+    <section class="research" id="research">
+        <div class="container">
+            <h2 class="section-title">Research & Publications</h2>
+            <div class="research-grid">
+                <div class="research-card">
+                    <h3>Smart Irrigation Systems</h3>
+                    <p class="research-meta">Published in IEEE Access, 2023</p>
+                    <p class="research-abstract">AI-driven irrigation optimization for water conservation in arid regions.</p>
+                    <a href="#" class="btn btn-outline">Read Paper</a>
+                </div>
+                <div class="research-card">
+                    <h3>Climate-Smart Agriculture</h3>
+                    <p class="research-meta">Journal of Sustainable Agriculture, 2022</p>
+                    <p class="research-abstract">Integrating IoT and machine learning for sustainable farming practices.</p>
+                    <a href="#" class="btn btn-outline">Read Paper</a>
+                </div>
+                <div class="research-card">
+                    <h3>Renewable Energy in Agriculture</h3>
+                    <p class="research-meta">Renewable Energy Journal, 2021</p>
+                    <p class="research-abstract">Optimizing solar energy usage in smart greenhouses.</p>
+                    <a href="#" class="btn btn-outline">Read Paper</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Global Voice Section -->
+    <section class="global-voice" id="media">
+        <div class="container">
+            <h2 class="section-title">Global Voice</h2>
+            <div class="media-grid">
+                <div class="tedx-video">
+                    <iframe src="https://www.youtube.com/embed/example" frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen></iframe>
+                </div>
+                <div class="media-card">
+                    <h3>TEDx Aswan</h3>
+                    <p>"Turning Challenges Into Opportunities: AI for Climate Resilience"</p>
+                    <a href="#" class="btn btn-outline">Watch Now</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="cta-section" id="contact">
+        <div class="hex-grid"></div>
+        <div class="cta-content">
+            <h2 class="cta-title">Let's Pioneer the Next Wave of Climate Solutions</h2>
+            <p class="cta-subtitle">I'm always open to discussing research collaborations, consulting opportunities, and innovative projects. Let's build a more sustainable and intelligent future together.</p>
+            <div class="cta-buttons">
+                <a href="mailto:contact@abdulrahmanhussein.com" class="btn btn-primary">Get in Touch</a>
+                <a href="#" class="btn btn-outline">View My CV</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span class="nav-logo">AH</span>
+                    <p>AI & Climate Change Innovator</p>
+                </div>
+                <div class="footer-links">
+                    <a href="#" aria-label="LinkedIn"><i data-lucide="linkedin"></i></a>
+                    <a href="#" aria-label="Twitter"><i data-lucide="twitter"></i></a>
+                    <a href="#" aria-label="GitHub"><i data-lucide="github"></i></a>
+                    <a href="#" aria-label="Google Scholar"><i data-lucide="graduation-cap"></i></a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Abdulrahman Hussein. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://unpkg.com/three@0.132.2/build/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
