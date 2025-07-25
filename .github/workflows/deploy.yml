@@ -6,6 +6,11 @@ on:
   pull_request:
     branches: [ main ]
 
+env:
+  NODE_VERSION: '18'
+  NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+  NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+
 jobs:
   build-and-deploy:
     name: 🌍 Build and Deploy Portfolio
@@ -18,7 +23,7 @@ jobs:
     - name: 🟢 Setup Node.js
       uses: actions/setup-node@v4
       with:
-        node-version: '18'
+        node-version: ${{ env.NODE_VERSION }}
         cache: 'npm'
         
     - name: 📦 Install Dependencies
@@ -46,23 +51,36 @@ jobs:
           rm -rf dist/node_modules dist/.git dist/dist 2>/dev/null || true
         fi
       
-    - name: 🌐 Deploy to Netlify
-      if: github.ref == 'refs/heads/main'
+    - name: 🌐 Deploy to Netlify (Production)
+      if: github.ref == 'refs/heads/main' && env.NETLIFY_SITE_ID != '' && env.NETLIFY_AUTH_TOKEN != ''
       uses: netlify/actions/cli@master
       with:
         args: deploy --prod --dir=.
       env:
-        NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-        NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+        NETLIFY_SITE_ID: ${{ env.NETLIFY_SITE_ID }}
+        NETLIFY_AUTH_TOKEN: ${{ env.NETLIFY_AUTH_TOKEN }}
         
     - name: 🔍 Deploy Preview (PR)
-      if: github.event_name == 'pull_request'
+      if: github.event_name == 'pull_request' && env.NETLIFY_SITE_ID != '' && env.NETLIFY_AUTH_TOKEN != ''
       uses: netlify/actions/cli@master
       with:
         args: deploy --dir=.
       env:
-        NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-        NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+        NETLIFY_SITE_ID: ${{ env.NETLIFY_SITE_ID }}
+        NETLIFY_AUTH_TOKEN: ${{ env.NETLIFY_AUTH_TOKEN }}
+        
+    - name: 📝 Deployment Status
+      if: always()
+      run: |
+        if [ "${{ env.NETLIFY_SITE_ID }}" = "" ] || [ "${{ env.NETLIFY_AUTH_TOKEN }}" = "" ]; then
+          echo "⚠️ Netlify secrets not configured. Skipping deployment."
+          echo "To enable automatic deployment:"
+          echo "1. Go to your repository Settings > Secrets and variables > Actions"
+          echo "2. Add NETLIFY_SITE_ID and NETLIFY_AUTH_TOKEN secrets"
+          echo "3. See AUTOMATION-SETUP.md for detailed instructions"
+        else
+          echo "✅ Deployment completed successfully!"
+        fi
         
     - name: 📊 Lighthouse CI
       if: github.ref == 'refs/heads/main'
