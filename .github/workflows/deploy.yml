@@ -1,0 +1,88 @@
+name: 🚀 Deploy Climate Portfolio
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-and-deploy:
+    name: 🌍 Build and Deploy Portfolio
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: 📥 Checkout Repository
+      uses: actions/checkout@v4
+      
+    - name: 🟢 Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+        
+    - name: 📦 Install Dependencies
+      run: npm ci
+      
+    - name: 🧪 Run Tests (if available)
+      run: npm test --if-present
+      
+    - name: 🔍 Lint Code
+      run: |
+        if [ -f "package.json" ] && grep -q "lint" package.json; then
+          npm run lint
+        else
+          echo "No lint script found, skipping..."
+        fi
+      
+    - name: 🏗️ Build Project
+      run: |
+        if [ -f "package.json" ] && grep -q "build" package.json; then
+          npm run build
+        else
+          echo "No build script found, using source files directly..."
+          mkdir -p dist
+          cp -r * dist/ 2>/dev/null || true
+          rm -rf dist/node_modules dist/.git dist/dist 2>/dev/null || true
+        fi
+      
+    - name: 🌐 Deploy to Netlify
+      if: github.ref == 'refs/heads/main'
+      uses: netlify/actions/cli@master
+      with:
+        args: deploy --prod --dir=.
+      env:
+        NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+        NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+        
+    - name: 🔍 Deploy Preview (PR)
+      if: github.event_name == 'pull_request'
+      uses: netlify/actions/cli@master
+      with:
+        args: deploy --dir=.
+      env:
+        NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+        NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+        
+    - name: 📊 Lighthouse CI
+      if: github.ref == 'refs/heads/main'
+      uses: treosh/lighthouse-ci-action@v10
+      with:
+        configPath: '.lighthouserc.json'
+        uploadArtifacts: true
+        temporaryPublicStorage: true
+        
+  security-scan:
+    name: 🔒 Security Scan
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: 📥 Checkout Repository
+      uses: actions/checkout@v4
+      
+    - name: 🔍 Run Security Audit
+      run: npm audit --audit-level moderate
+      
+    - name: 🛡️ Dependency Check
+      uses: actions/dependency-review-action@v3
+      if: github.event_name == 'pull_request'
